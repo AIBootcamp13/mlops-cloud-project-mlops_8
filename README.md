@@ -116,15 +116,15 @@
 <br>
 
 ## 🚨​ 트러블 슈팅
-### 1. airflow version 에러 발견
+
+### 1. Airflow DockerOperator ML 파이프라인 FileNotFoundError 트러블슈팅
 
 #### 설명
-- _프로젝트 진행 중 발생한 트러블에 대해 작성해주세요_
+- Airflow DockerOperator를 사용한 ML 파이프라인에서 FileNotFoundError가 발생했습니다. ML 코드가 실행되는 도커 이미지 내부에 파일이 존재함에도 불구하고, 태스크 실행 시 파일을 찾지 못했습니다. 이는 DockerOperator가 매번 새로운 컨테이너를 생성하는 방식과 ML 코드 내 데이터셋 파일 경로 참조 방식(상대 경로 사용)의 불일치 때문이었습니다. 새로 생성된 컨테이너가 의도한 위치에서 파일을 찾지 못하면서 오류가 발생했습니다.
 
 #### 해결
-- _프로젝트 진행 중 발생한 트러블 해결방법 대해 작성해주세요_
-
-<br>
+- 도커 이미지 및 버전 재확인: Dockerfile에서 데이터셋 파일이 /opt/mlops/dataset/ 경로에 정확히 COPY되는지 확인하고, Airflow가 최신 버전의 이미지를 사용하도록 보장했습니다.
+- ML 코드 내 마운트 되는 경로 절대 경로로 수정
 
 ## 📰​ 참고자료
 - [ppt](https://docs.google.com/presentation/d/1BX9PCfKckJTmf3du9hvXv3o8dujUtgkN/edit?slide=id.p1#slide=id.p1)
